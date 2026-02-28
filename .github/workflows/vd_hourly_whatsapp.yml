@@ -25,7 +25,7 @@ jobs:
 
       - run: echo '${{ secrets.GOOGLE_CREDENTIALS_JSON }}' > credentials.json
 
-      - run: python VD Hourly Whatsapp.py
+      - run: python VD_Hourly_Whatsapp.py
         env:
           CLOUD_NAME: ${{ secrets.CLOUD_NAME }}
           UPLOAD_PRESET: ${{ secrets.UPLOAD_PRESET }}
