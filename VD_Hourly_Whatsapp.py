@@ -21,8 +21,8 @@ SHEET_ID = os.getenv("SHEET_ID")
 SHEET_NAME = "VD Top Batch Day View"
 
 RANGES = [
-    f"{SHEET_NAME}!A5:F20",
-    f"{SHEET_NAME}!H6:M20",
+    f"{SHEET_NAME}!A21:F37",
+    f"{SHEET_NAME}!H23:M37",
 ]
 
 CLOUD_NAME = os.getenv("CLOUD_NAME")
