@@ -2,7 +2,7 @@ name: VD Hourly Whatsapp
 
 on:
   schedule:
-    - cron: "25 * * * *"
+    - cron: "30 0-20 * * *"
   workflow_dispatch:
 
 jobs:
