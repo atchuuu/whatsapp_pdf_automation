@@ -7,6 +7,7 @@ import logging
 import tempfile
 from datetime import datetime
 from typing import List
+import json
 
 import requests
 from PIL import Image, ImageEnhance, ImageChops
@@ -15,7 +16,6 @@ from google.oauth2.service_account import Credentials
 from google.auth.transport.requests import Request
 from googleapiclient.discovery import build
 
-KEY_FILE = "credentials.json"
 
 SHEET_ID = os.getenv("SHEET_ID")
 SHEET_NAME = "VD Top Batch Day View"
@@ -92,8 +92,10 @@ def crop_white_space(img: Image.Image) -> Image.Image:
     return img.crop(bbox) if bbox else img
 
 def export_and_upload_images() -> List[str]:
-    creds = Credentials.from_service_account_file(
-        KEY_FILE,
+    creds_info = json.loads(os.getenv("GOOGLE_CREDENTIALS_JSON"))
+
+    creds = Credentials.from_service_account_info(
+        creds_info,
         scopes=[
             "https://www.googleapis.com/auth/drive.readonly",
             "https://www.googleapis.com/auth/spreadsheets.readonly",
@@ -211,8 +213,6 @@ if __name__ == "__main__":
     if missing:
         raise EnvironmentError(f"missing secrets: {', '.join(missing)}")
 
-    if not os.path.exists(KEY_FILE):
-        raise FileNotFoundError("credentials.json not found")
 
     Image.MAX_IMAGE_PIXELS = 300_000_000
 

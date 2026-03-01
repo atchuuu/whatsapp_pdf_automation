@@ -1,0 +1,1 @@
+worker: python VD_Hourly_Whatsapp.py
